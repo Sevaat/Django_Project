@@ -18,8 +18,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product/photo', blank=True, null=True, verbose_name="Изображение продукта")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Категория продукта", related_name="products")
     price = models.CharField(max_length=50, verbose_name="Стоимость продукта")
-    created_at = models.DateField(verbose_name="Дата изготовления (создания) продукта")
-    updated_at = models.DateTimeField(verbose_name="Дата последнего изменения продукта")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата изготовления (создания) продукта")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения продукта")
 
     class Meta:
         verbose_name = "Продукт"
