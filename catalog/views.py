@@ -19,5 +19,5 @@ def products_detail(request, pk):
     return render(request, 'products_detail.html', context)
 
 
-def company_detail(request):
-    return render(request, 'company_detail.html')
+def contacts(request):
+    return render(request, 'contacts.html')
