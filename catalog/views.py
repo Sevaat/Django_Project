@@ -8,7 +8,12 @@ def products_list(request):
     context = {'products': products}
     return render(request, 'products_list.html', context)
 
+
 def products_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     context = {'product': product}
     return render(request, 'products_detail.html', context)
+
+
+def company_detail(request):
+    return render(request, 'company_detail.html')
