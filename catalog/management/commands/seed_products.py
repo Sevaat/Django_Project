@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
             # Загружаем продукты
             try:
-                call_command('loaddata', 'products')
+                call_command('loaddata', 'catalog')
                 self.stdout.write(self.style.SUCCESS('Продукты загружены'))
             except Exception as e:
                 self.stdout.write(self.style.ERROR(f'Ошибка загрузки продуктов: {e}'))

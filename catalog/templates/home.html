@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 
 {% block content %}
 
@@ -109,11 +109,7 @@
     <p>Популярные товары временно недоступны.</p>
 
 <h2>Почему выбирают нас</h2>
-<ul>
-    <li>Широкий ассортимент современной техники.</li>
-    <li>Тщательный подбор товаров с учетом потребностей клиентов.</li>
-    <li>Поддержка и консультации по выбору устройств.</li>
-</ul>
+    <p>Широкий ассортимент современной техники.</p>
         <div class="d-inline-flex gap-2 mb-3">
             <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill" role="button" href="{% url 'catalog:products_list' %}">Перейти в каталог</a>
         </div>

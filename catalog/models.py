@@ -16,10 +16,15 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование продукта")
     description = models.CharField(max_length=500, verbose_name="Описание продукта")
     image = models.ImageField(upload_to='product/photo', blank=True, null=True, verbose_name="Изображение продукта")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Категория продукта", related_name="products")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Категория продукта", related_name="catalog")
     price = models.CharField(max_length=50, verbose_name="Стоимость продукта")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата изготовления (создания) продукта")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения продукта")
+    views_counter = models.PositiveIntegerField(
+        verbose_name="Счетчик просмотров",
+        help_text="Укажите количество просмотров",
+        default=0
+    )
 
     @property
     def get_description(self):

@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('price', models.CharField(max_length=50, verbose_name='Стоимость продукта')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата изготовления (создания) продукта')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения продукта')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='products', to='catalog.category', verbose_name='Категория продукта')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='catalog', to='catalog.category', verbose_name='Категория продукта')),
             ],
             options={
                 'verbose_name': 'Продукт',
