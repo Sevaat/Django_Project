@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 {% load my_tags %}
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
@@ -7,7 +7,7 @@
                         <div class="card-img-top"
                          style="height: 400px; width: 100%;
             background: linear-gradient(rgba(85, 89, 92, 0), rgba(85, 89, 92, 0)),
-                        url('{{ product.image | media_filter }}') center/contain no-repeat;
+                        url('{{ object.preview | media_filter }}') center/contain no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -15,11 +15,10 @@
             font-size: 1.2rem;">
                     </div>
                         <div class="card-body">
-                            <p class="card-text">Наименование: {{ product.name }}</p>
-                            <p class="card-text">Категория: {{ product.category }}</p>
-                            <p class="card-text">Описание: {{ product.description }}</p>
-                            <p class="card-text">Стоимость: {{ product.price }} ₽</p>
-                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_list' %}">Назад</a>
+                            <h3 class="card-text"> {{ object.title }}</h3>
+                            <p class="card-text"> {{ object.content }}</p>
+                            <p class="card-text">Дата создания: {{ object.created_at }}</p>
+                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'blog:notes_list' %}">Назад</a>
                         </div>
                     </div>
         </div>

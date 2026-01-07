@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="card shadow-sm">
+                        <div class="card-img-top"
+                         style="height: 400px; width: 100%;
+            background: linear-gradient(rgba(85, 89, 92, 0), rgba(85, 89, 92, 0)),
+                        url('{{ object.image | media_filter }}') center/contain no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eceeef;
+            font-size: 1.2rem;">
+                    </div>
+                        <div class="card-body">
+                            <p class="card-text">Наименование: {{ object.name }}</p>
+                            <p class="card-text">Категория: {{ object.category }}</p>
+                            <p class="card-text">Описание: {{ object.description }}</p>
+                            <p class="card-text">Стоимость: {{ object.price }} ₽</p>
+                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_list' %}">Назад</a>
+                        </div>
+                    </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,12 +1,17 @@
 from django.urls import path
+
 from catalog.apps import CatalogConfig
-from catalog.views import products_list, products_detail, contacts, home
+from catalog.views import (ContactsView, HomeView, ProductCreateView, ProductDeleteView, ProductDetailView,
+                           ProductListView, ProductUpdateView)
 
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('catalog/', products_list, name='products_list'),
-    path('products/<int:pk>/', products_detail, name='products_detail'),
-    path('contacts/', contacts, name='contacts'),
+    path("", HomeView.as_view(), name="home"),
+    path("catalog/", ProductListView.as_view(), name="products_list"),
+    path("catalog/<int:pk>/", ProductDetailView.as_view(), name="products_detail"),
+    path("contacts/", ContactsView.as_view(), name="contacts"),
+    path("catalog/create/", ProductCreateView.as_view(), name="products_create"),
+    path("catalog/<int:pk>/update/", ProductUpdateView.as_view(), name="products_update"),
+    path("catalog/<int:pk>/delete/", ProductDeleteView.as_view(), name="products_delete"),
 ]

@@ -8,39 +8,56 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Наименование категории')),
-                ('description', models.CharField(max_length=500, verbose_name='Описание категории')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100, verbose_name="Наименование категории")),
+                ("description", models.CharField(max_length=500, verbose_name="Описание категории")),
             ],
             options={
-                'verbose_name': 'Категория',
-                'verbose_name_plural': 'Категории',
-                'ordering': ['name'],
+                "verbose_name": "Категория",
+                "verbose_name_plural": "Категории",
+                "ordering": ["name"],
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Наименование продукта')),
-                ('description', models.CharField(max_length=500, verbose_name='Описание продукта')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='product/photo', verbose_name='Изображение продукта')),
-                ('price', models.CharField(max_length=50, verbose_name='Стоимость продукта')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата изготовления (создания) продукта')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения продукта')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='products', to='catalog.category', verbose_name='Категория продукта')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100, verbose_name="Наименование продукта")),
+                ("description", models.CharField(max_length=500, verbose_name="Описание продукта")),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="product/photo", verbose_name="Изображение продукта"
+                    ),
+                ),
+                ("price", models.CharField(max_length=50, verbose_name="Стоимость продукта")),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Дата изготовления (создания) продукта"),
+                ),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения продукта")),
+                (
+                    "category",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="catalog",
+                        to="catalog.category",
+                        verbose_name="Категория продукта",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Продукт',
-                'verbose_name_plural': 'Продукты',
-                'ordering': ['name', 'category', 'price', 'created_at', 'updated_at'],
+                "verbose_name": "Продукт",
+                "verbose_name_plural": "Продукты",
+                "ordering": ["name", "category", "price", "created_at", "updated_at"],
             },
         ),
     ]
