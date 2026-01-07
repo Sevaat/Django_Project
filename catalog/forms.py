@@ -1,4 +1,7 @@
+from typing import Any
+
 from django import forms
+
 from catalog.models import Product
 
 BANNED_WORDS = [
@@ -19,7 +22,7 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ("name", "description", "image", "category", "price")
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs["class"] = "form-control"
@@ -27,28 +30,21 @@ class ProductForm(forms.ModelForm):
         self.fields["name"].widget.attrs["placeholder"] = "Введите название продукта"
         self.fields["description"].widget.attrs["placeholder"] = "Введите описание продукта"
 
-
-    def clean_name(self):
+    def clean_name(self) -> Any:
         name = self.cleaned_data.get("name", "")
         lower = name.lower()
         if any(word in lower for word in BANNED_WORDS):
-            raise forms.ValidationError(
-                "Название содержит запрещённые слова."
-            )
+            raise forms.ValidationError("Название содержит запрещённые слова.")
         return name
 
-
-    def clean_description(self):
+    def clean_description(self) -> Any:
         description = self.cleaned_data.get("description", "")
         lower = description.lower()
         if any(word in lower for word in BANNED_WORDS):
-            raise forms.ValidationError(
-                "Описание содержит запрещённые слова."
-            )
+            raise forms.ValidationError("Описание содержит запрещённые слова.")
         return description
 
-
-    def clean_price(self):
+    def clean_price(self) -> Any:
         price = self.cleaned_data.get("price")
         price = price.replace(",", ".")
         price = price.replace(" ", "")
@@ -60,7 +56,7 @@ class ProductForm(forms.ModelForm):
         raise forms.ValidationError("Цена продукта введена некорректно.")
 
     @staticmethod
-    def can_convert_to_float(s):
+    def can_convert_to_float(s: Any) -> bool:
         """Проверка возможности конвертации в float"""
         try:
             float(s)

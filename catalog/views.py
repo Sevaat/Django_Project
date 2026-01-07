@@ -3,8 +3,8 @@ from typing import Any
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
-from catalog.models import Product
 from catalog.forms import ProductForm
+from catalog.models import Product
 
 
 class HomeView(TemplateView):
@@ -18,7 +18,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
-    def get_object(self, queryset=None) -> Any:
+    def get_object(self, queryset: Any = None) -> Any:
         self.object = super().get_object(queryset)
         self.object.views_counter += 1
         self.object.save()
