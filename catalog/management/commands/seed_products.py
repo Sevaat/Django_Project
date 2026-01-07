@@ -8,14 +8,14 @@ from django.db import transaction
 class Command(BaseCommand):
     help = "Очищает базу и загружает тестовые данные из фикстур"
 
-    def add_arguments(self, parser) -> Any:
+    def add_arguments(self, parser: Any) -> Any:
         parser.add_argument(
             "--no-flush",
             action="store_true",
             help="Не очищать базу перед загрузкой",
         )
 
-    def handle(self, *args, **options) -> Any:
+    def handle(self, *args: Any, **options: Any) -> Any:
         no_flush = options["no_flush"]
 
         with transaction.atomic():
