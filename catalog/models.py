@@ -2,6 +2,8 @@ from typing import Any
 
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование категории")
@@ -34,6 +36,8 @@ class Product(models.Model):
     views_counter = models.PositiveIntegerField(
         verbose_name="Счетчик просмотров", help_text="Укажите количество просмотров", default=0
     )
+    publication_flag = models.BooleanField(default=False, verbose_name="Признак публикации")
+    owner = models.ForeignKey(User, verbose_name="Владелец", help_text="Укажите владельца продукта", blank=True, null=True, on_delete=models.SET_NULL)
 
     @property
     def get_description(self) -> Any:
@@ -45,6 +49,10 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "category", "price", "created_at", "updated_at"]
+        permissions = [
+            ("can_unpublish_product", "Can edit publication flag"),
+            ("can_delete_product", "Can delete flag"),
+        ]
 
     def __str__(self) -> Any:
         return self.name
