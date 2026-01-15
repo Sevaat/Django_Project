@@ -92,11 +92,6 @@
         <div class="row py-lg-3">
             <div class="col-lg-6 col-md-8 mx-auto"><h1 class="fw-light">TechZone</h1>
                 <p class="lead text-body-secondary">Каталог бытовой техники.</p>
-                {% if user.is_authenticated %}
-                <p>
-                    <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_create' %}">Добавить продукт</a>
-                </p>
-                {% endif %}
             </div>
         </div>
     </section>
