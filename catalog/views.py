@@ -20,7 +20,7 @@ class ProductListView(ListView):
         return Product.objects.filter(publication_flag=True)
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_object(self, queryset: Any = None) -> Any:
