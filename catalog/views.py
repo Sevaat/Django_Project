@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
@@ -29,13 +30,17 @@ class ContactsView(TemplateView):
     template_name = "contacts.html"
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    login_url = "users:login"
+    redirect_field_name = "next"
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:products_list")
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "users:login"
+    redirect_field_name = "next"
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:products_list")
@@ -44,6 +49,8 @@ class ProductUpdateView(UpdateView):
         return reverse("catalog:products_detail", args=[self.kwargs.get("pk")])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "users:login"
+    redirect_field_name = "next"
     model = Product
     success_url = reverse_lazy("catalog:products_list")

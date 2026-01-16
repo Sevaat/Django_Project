@@ -8,8 +8,12 @@
                         <li><a href="{% url 'catalog:home' %}" class="text-white">Главная</a></li>
                         <li><a href="{% url 'catalog:products_list' %}" class="text-white">Каталог</a></li>
                         <li><a href="{% url 'blog:notes_list' %}" class="text-white">Блог</a></li>
-                        <li><a href="#" class="text-white">Вход</a></li>
-                        <li><a href="#" class="text-white">Регистрация</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
+                        {% else %}
+                        <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
+                        <li><a href="{% url 'users:create' %}" class="text-white">Регистрация</a></li>
+                        {% endif %}
                       <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
                     </ul>
                 </div>
