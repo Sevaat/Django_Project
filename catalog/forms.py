@@ -63,3 +63,8 @@ class ProductForm(forms.ModelForm):
             return True
         except (ValueError, TypeError):
             return False
+
+class ProductModeratorForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ("name", "description", "image", "category", "price", "publication_flag",)
