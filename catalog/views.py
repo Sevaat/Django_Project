@@ -7,6 +7,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, T
 
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product
+from catalog.services import get_products_cache
 
 
 class HomeView(TemplateView):
@@ -17,7 +18,7 @@ class ProductListView(ListView):
     model = Product
 
     def get_queryset(self) -> Any:
-        return Product.objects.filter(publication_flag=True)
+        return get_products_cache()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
