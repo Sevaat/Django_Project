@@ -7,6 +7,7 @@
                     <ul class="list-unstyled">
                         <li><a href="{% url 'catalog:home' %}" class="text-white">Главная</a></li>
                         <li><a href="{% url 'catalog:products_list' %}" class="text-white">Каталог</a></li>
+                        <li><a href="{% url 'catalog:product_categories' %}" class="text-white">Категории продуктов</a></li>
                         <li><a href="{% url 'blog:notes_list' %}" class="text-white">Блог</a></li>
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
