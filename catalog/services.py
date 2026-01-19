@@ -6,7 +6,7 @@ from catalog.models import Product
 from config.settings import CACHE_ENABLED
 
 
-def  get_products_cache() -> Any:
+def get_products_cache() -> QuerySet[Product]:
     """Получение данных из кэша или запись данных в кэш об опубликованных продуктах"""
     if not CACHE_ENABLED:
         return Product.objects.filter(publication_flag=True)
