@@ -1,12 +1,13 @@
 from typing import Any
 
 from django.core.cache import cache
+from django.db.models import QuerySet
 
 from catalog.models import Product
 from config.settings import CACHE_ENABLED
 
 
-def  get_products_cache() -> Any:
+def get_products_cache() -> QuerySet[Product]:
     """Получение данных из кэша или запись данных в кэш об опубликованных продуктах"""
     if not CACHE_ENABLED:
         return Product.objects.filter(publication_flag=True)
@@ -18,22 +19,19 @@ def  get_products_cache() -> Any:
     cache.set(key, products)
     return products
 
-def get_products_by_category(category_id: int) -> Any:
+def get_products_by_category(category_id: int) -> QuerySet[Product]:
     """Возвращает список опубликованных продуктов указанной категории"""
-    if not CACHE_ENABLED:
-        return Product.objects.filter(
-            publication_flag=True,
-            category_id=category_id,
-        )
+    products = Product.objects.filter(
+        publication_flag=True, category_id=category_id
+    )
 
-    key = f"products_list_category_{category_id}"
-    products = cache.get(key)
-    if products is not None:
+    if not CACHE_ENABLED:
         return products
 
-    products = Product.objects.filter(
-        publication_flag=True,
-        category_id=category_id,
-    )
+    key = f"products_list_category_{category_id}"
+    if cached_products := cache.get(key):
+        return cached_products
+
     cache.set(key, products)
+
     return products
