@@ -17,6 +17,12 @@ class Category(models.Model):
     def __str__(self) -> Any:
         return self.name
 
+    @property
+    def get_description(self) -> Any:
+        if len(self.description) < 100:
+            return self.description
+        return f"{self.description[:97]}..."
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование продукта")

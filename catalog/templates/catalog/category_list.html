@@ -4,7 +4,7 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for product in object_list %}
+            {% for category in object_list %}
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-img-top"
@@ -16,18 +16,12 @@
             justify-content: center;
             color: #eceeef;
             font-size: 1.2rem;">
-                        {{ product.name }}
+                        {{ category.name }}
                     </div>
-                    <div class="card-body"><p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    <div class="card-body"><p class="card-text">{{ category.description|truncatechars:100 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             {% if user.is_authenticated %}
-                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_detail' product.pk %}">Подробнее</a>
-                            {% endif %}
-                            {% if perms.catalog.can_unpublish_product %}
-                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_update' product.pk %}">Редактировать</a>
-                            {% endif %}
-                            {% if perms.catalog.can_delete_product %}
-                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_delete' product.pk %}">Удалить</a>
+                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{% url 'catalog:products_by_category' category.pk %}">Просмотр</a>
                             {% endif %}
                         </div>
                     </div>
